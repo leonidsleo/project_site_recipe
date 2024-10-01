@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe_show.name }}{% endblock %}
+
+{% block content %}
+ <div>
+    <div>
+        <h2>Название рецепта: {{ recipe_show.name }}</h2><br>
+        {% if recipe_show.image %}
+            <img src="{{ recipe_show.image.url }}" alt="{{ recipe_show.name }}" width="400" height="300"><br>
+        {% endif %}
+        <h3>Описание рецепта:</h3>
+        <p>{{ recipe_show.description }}</p><br>
+        <h3>Ингридиенты:</h3> 
+        <p>{{ recipe_show.preparation_steps }}</p><br>
+        <p><h3>Время приготовления ( мин.):</h3>{{ recipe_show.preparation_time }}</p><br>
+        <p><h3>Автор: </h3>{{ recipe_show.autor }}</p><br>
+        <p><h3>Категория: </h3>{{ recipe_show.category }}</p>
+    </div>
+    <hr>
+    <br>
+    <div>
+        {% if user.is_authenticated %}
+            {% if recipe_show.autor.id == user.id %}
+                <p><a href="{% url 'recipeedit' recipe_show.id %}">Редактировать</a></p>
+            {% endif %}
+        {% endif %}
+    </div>
+    
+ </div>
+
+{% endblock %}

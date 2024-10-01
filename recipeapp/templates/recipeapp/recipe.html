@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+<div>
+    <p>
+        Все рецепты<br>
+        Пока без группировки и сортировки
+    </p>
+</div>
+<br>
+<div>
+    {% for r in recipe_all %}
+    <hr>
+    <br>
+    <h2>Название рецепта: {{ r.name }}</h2><br>
+    {% if r.image %}
+        <img src="{{ r.image.url }}" alt="{{ r.name }}" width="400" height="300"><br>
+    {% endif %}
+    <!-- <h3>Описание рецепта: </h3>
+    <p>{{ r.description }}</p><br>
+    <h3>Ингридиенты:</h3>
+    <p>{{ r.preparation_steps }}</p><br> -->
+    <p class="p"><h3>Время приготовления (мин): </h3> {{ r.preparation_time }} </p><br>
+    <!-- <h3>Автор:</h3>
+    <p>{{ r.autor }}</p> -->
+    <h3>Категория:</h3>
+    <p>{{ r.category }}</p><br>
+    <a type="" href="{% url 'recipeshow' r.id %}">Показать рецепт</a><br>
+    <br>
+    <hr>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

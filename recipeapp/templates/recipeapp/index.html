@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+<h1>Сайт с рецептами</h1>
+<div>
+    <p>
+        На сайте вы можете найти рецепты приготовления<br>
+        Так же можете разместить свой рецепт, для этого зарегистрируйесь
+    </p>
+</div>
+<br>
+<div>
+    {% for r in recipe_five %}
+    <br>
+        <a href="{% url 'recipeshow' r.id %}">{{ r.name }}</a>
+    <br>
+    {% endfor %}
+    <br>
+    <hr>
+    <br>
+</div>
+<div>
+    {% for r in recipe_five %}
+        <h2>Название рецепта: {{ r.name }}</h2><br>
+        {% if r.image %}
+            <img src="{{ r.image.url }}" alt="{{ r.name }}" width="400" height="300"><br>
+        {% endif %}
+        <h3>Ингридиенты:</h3>
+        <p>{{ r.preparation_steps }}</p><br>
+        <h3>Время приготовления (мин):</h3>
+        <p>{{ r.preparation_time }}</p><br>
+        <a type="" href="{% url 'recipeshow' r.id %}">Показать рецепт</a><br>
+
+
+        <br>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}
